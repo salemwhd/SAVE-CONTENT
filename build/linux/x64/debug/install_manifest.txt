@@ -1,0 +1,12 @@
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/social_wall
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/icudtl.dat
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/lib/libflutter_linux_gtk.so
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.bin
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/AssetManifest.json
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/FontManifest.json
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/kernel_blob.bin
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/NOTICES.Z
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/shaders/ink_sparkle.frag
+/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/bundle/data/flutter_assets/version.json

@@ -1,0 +1,56 @@
+# ninja log v5
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	6d873ea93c7dc4a6
+54	10535	0	flutter/_phony_	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_engine.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	6d873ea93c7dc4a6
+12918	13471	1701822782897105400	intermediates_do_not_run/social_wall	ca77eb9f88889c18
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_view.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	6d873ea93c7dc4a6
+10723	12833	1701822782251858700	CMakeFiles/social_wall.dir/flutter/generated_plugin_registrant.cc.o	b81e2bb7dd39e058
+33242	39618	1701788151707992900	CMakeFiles/social_wall.dir/main.cc.o	3a7801059dfb0941
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/flutter/_phony_	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	6d873ea93c7dc4a6
+13471	14815	0	CMakeFiles/install.util	e13803af63f4235a
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_value.h	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/libflutter_linux_gtk.so	6d873ea93c7dc4a6
+54	10535	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	6d873ea93c7dc4a6
+10702	12918	1701822782315156500	CMakeFiles/social_wall.dir/my_application.cc.o	5689aea045594841
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/libflutter_linux_gtk.so	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_engine.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_call.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_method_response.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_value.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/fl_view.h	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/linux/flutter/ephemeral/flutter_linux/flutter_linux.h	6d873ea93c7dc4a6
+16	3421	0	flutter/_phony_	6d873ea93c7dc4a6
+16	3421	0	/mnt/01D68E9B1FB32EC0/EDUCATIONAL/flutter project/social_wall/build/linux/x64/debug/flutter/_phony_	6d873ea93c7dc4a6
+3424	4558	1701878365185123100	CMakeFiles/social_wall.dir/flutter/generated_plugin_registrant.cc.o	b81e2bb7dd39e058
+3424	4638	1701878365267387700	CMakeFiles/social_wall.dir/my_application.cc.o	5689aea045594841
+4638	4883	1701878365517979600	intermediates_do_not_run/social_wall	ca77eb9f88889c18
+4883	5490	0	CMakeFiles/install.util	e13803af63f4235a

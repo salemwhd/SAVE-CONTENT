@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "351774807398",
+    "project_id": "social-wall-bbc71",
+    "storage_bucket": "social-wall-bbc71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351774807398:android:6a9b7a9fa485e239e3a4a7",
+        "android_client_info": {
+          "package_name": "com.example.CONTGUARD"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlj_6-ISZ1FDhRd-kVHWCOIzL2A5zhpdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
