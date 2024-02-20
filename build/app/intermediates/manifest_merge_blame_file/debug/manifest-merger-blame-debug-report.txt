@@ -13,14 +13,14 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\android\app\src\debug\AndroidManifest.xml:7:5-66
-15-->D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\android\app\src\debug\AndroidManifest.xml:7:22-64
+15-->D:\EDUCATIONAL\level 4\project\CONTGUARD\android\app\src\debug\AndroidManifest.xml:7:5-66
+15-->D:\EDUCATIONAL\level 4\project\CONTGUARD\android\app\src\debug\AndroidManifest.xml:7:22-64
 16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-16-->D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\android\app\src\main\AndroidManifest.xml:3:5-80
-16-->D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\android\app\src\main\AndroidManifest.xml:3:22-78
+16-->D:\EDUCATIONAL\level 4\project\CONTGUARD\android\app\src\main\AndroidManifest.xml:3:5-80
+16-->D:\EDUCATIONAL\level 4\project\CONTGUARD\android\app\src\main\AndroidManifest.xml:3:22-78
 17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-17-->D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\android\app\src\main\AndroidManifest.xml:4:5-79
-17-->D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\android\app\src\main\AndroidManifest.xml:4:22-77
+17-->D:\EDUCATIONAL\level 4\project\CONTGUARD\android\app\src\main\AndroidManifest.xml:4:5-79
+17-->D:\EDUCATIONAL\level 4\project\CONTGUARD\android\app\src\main\AndroidManifest.xml:4:22-77
 18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 18-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\salem\.gradle\caches\transforms-3\9bc95715a1e25257ea81d2323ad3863c\transformed\jetified-firebase-auth-22.3.1\AndroidManifest.xml:26:5-79
 18-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\salem\.gradle\caches\transforms-3\9bc95715a1e25257ea81d2323ad3863c\transformed\jetified-firebase-auth-22.3.1\AndroidManifest.xml:26:22-76
@@ -81,37 +81,37 @@
 65            android:value="2" />
 66
 67        <service
-67-->[:firebase_auth] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:19
+67-->[:firebase_auth] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:19
 68            android:name="com.google.firebase.components.ComponentDiscoveryService"
-68-->[:firebase_auth] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:10:18-89
+68-->[:firebase_auth] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:10:18-89
 69            android:directBootAware="true"
 69-->[com.google.firebase:firebase-common:20.4.2] C:\Users\salem\.gradle\caches\transforms-3\dab1e44cce4ffd2e2ff7bf920ca385fe\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:32:13-43
 70            android:exported="false" >
 70-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\salem\.gradle\caches\transforms-3\9bc95715a1e25257ea81d2323ad3863c\transformed\jetified-firebase-auth-22.3.1\AndroidManifest.xml:68:13-37
 71            <meta-data
-71-->[:firebase_auth] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+71-->[:firebase_auth] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
 72                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-72-->[:firebase_auth] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-124
+72-->[:firebase_auth] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-124
 73                android:value="com.google.firebase.components.ComponentRegistrar" />
-73-->[:firebase_auth] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+73-->[:firebase_auth] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
 74            <meta-data
-74-->[:firebase_storage] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+74-->[:firebase_storage] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
 75                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-75-->[:firebase_storage] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-126
+75-->[:firebase_storage] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-126
 76                android:value="com.google.firebase.components.ComponentRegistrar" />
-76-->[:firebase_storage] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+76-->[:firebase_storage] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
 77            <meta-data
-77-->[:cloud_firestore] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+77-->[:cloud_firestore] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
 78                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-78-->[:cloud_firestore] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-134
+78-->[:cloud_firestore] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-134
 79                android:value="com.google.firebase.components.ComponentRegistrar" />
-79-->[:cloud_firestore] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+79-->[:cloud_firestore] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
 80            <meta-data
-80-->[:firebase_core] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+80-->[:firebase_core] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
 81                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-81-->[:firebase_core] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-124
+81-->[:firebase_core] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-124
 82                android:value="com.google.firebase.components.ComponentRegistrar" />
-82-->[:firebase_core] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+82-->[:firebase_core] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
 83            <meta-data
 83-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\salem\.gradle\caches\transforms-3\9bc95715a1e25257ea81d2323ad3863c\transformed\jetified-firebase-auth-22.3.1\AndroidManifest.xml:69:13-71:85
 84                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
@@ -169,21 +169,21 @@
 110        </service>
 111
 112        <provider
-112-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+112-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
 113            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-113-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+113-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
 114            android:authorities="com.example.CONTGUARD.flutter.image_provider"
-114-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+114-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
 115            android:exported="false"
-115-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+115-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
 116            android:grantUriPermissions="true" >
-116-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+116-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
 117            <meta-data
-117-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+117-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 118                android:name="android.support.FILE_PROVIDER_PATHS"
-118-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+118-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 119                android:resource="@xml/flutter_image_picker_file_paths" />
-119-->[:image_picker_android] D:\EDUCATIONAL\level 4\graduation project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+119-->[:image_picker_android] D:\EDUCATIONAL\level 4\project\CONTGUARD\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 120        </provider>
 121
 122        <activity

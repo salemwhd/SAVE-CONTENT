@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sq\\values-sq.xml",
+            "outputFile": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sq\\values-sq.xml",
             "map": [
                 {
                     "source": "C:\\Users\\salem\\.gradle\\caches\\transforms-3\\c47e1d7fce9bc8925a1de7bd59f7f78c\\transformed\\jetified-play-services-base-18.0.1\\res\\values-sq\\values.xml",

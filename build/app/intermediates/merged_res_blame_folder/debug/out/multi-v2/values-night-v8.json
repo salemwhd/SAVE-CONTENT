@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

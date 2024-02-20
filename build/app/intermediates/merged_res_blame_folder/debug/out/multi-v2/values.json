@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\salem\\.gradle\\caches\\transforms-3\\189937cbe2312e586dfa2941c00b4f44\\transformed\\lifecycle-viewmodel-2.6.1\\res\\values\\values.xml",
@@ -129,7 +129,7 @@
                     }
                 },
                 {
-                    "source": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -165,23 +165,6 @@
                     }
                 },
                 {
-                    "source": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,137,241,350,470,571",
-                        "endColumns": "81,103,108,119,100,77",
-                        "endOffsets": "132,236,345,465,566,644"
-                    },
-                    "to": {
-                        "startLines": "144,145,146,147,148,149",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "10162,10244,10348,10457,10577,10678",
-                        "endColumns": "81,103,108,119,100,77",
-                        "endOffsets": "10239,10343,10452,10572,10673,10751"
-                    }
-                },
-                {
                     "source": "C:\\Users\\salem\\.gradle\\caches\\transforms-3\\f1f4c2c1976e17d72df4d90be01da028\\transformed\\jetified-activity-1.7.2\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3",
@@ -196,6 +179,23 @@
                         "startOffsets": "5706,6650",
                         "endColumns": "41,59",
                         "endOffsets": "5743,6705"
+                    }
+                },
+                {
+                    "source": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,137,241,350,470,571",
+                        "endColumns": "81,103,108,119,100,77",
+                        "endOffsets": "132,236,345,465,566,644"
+                    },
+                    "to": {
+                        "startLines": "144,145,146,147,148,149",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "10162,10244,10348,10457,10577,10678",
+                        "endColumns": "81,103,108,119,100,77",
+                        "endOffsets": "10239,10343,10452,10572,10673,10751"
                     }
                 },
                 {

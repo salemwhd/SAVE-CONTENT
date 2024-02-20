@@ -232,18 +232,19 @@ class _WallPostState extends State<WallPost> {
                   const SizedBox(
                     width: 10,
                   ),
-                  Column(
-                    children: [
-                      // delete button
-                      IconButton(
-                        icon: Icon(Icons.delete, color: Colors.red),
-                        onPressed: deletePost,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
+                  if (currentUser.email == widget.user)
+                    Column(
+                      children: [
+                        // delete button
+                        IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: deletePost,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                 ],
               ),
               const SizedBox(
