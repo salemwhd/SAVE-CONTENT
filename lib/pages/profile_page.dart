@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:CONTGUARD/components/global_appBar.dart';
 import 'package:CONTGUARD/components/text_box.dart';
@@ -6,6 +10,7 @@ import 'package:CONTGUARD/components/wall_post.dart';
 import 'package:CONTGUARD/helper/helper_method.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:CONTGUARD/components/my_follow_button.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   final String userId;
@@ -22,11 +27,17 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   late final String userEmail;
   final usersCollection = FirebaseFirestore.instance.collection("Users");
+  final storage = FirebaseStorage.instance;
+  final picker = ImagePicker();
+  late String? imageUrl;
 
   @override
   void initState() {
     super.initState();
     userEmail = widget.userId;
+    fetchProfileImage().then((_) {
+      setState(() {}); // Trigger a rebuild after fetching the image
+    });
   }
 
   Future<void> editField(String field) async {
@@ -75,6 +86,34 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  Future<void> fetchProfileImage() async {
+    final userData = await usersCollection.doc(userEmail).get();
+    final profileImageUrl = userData.data()?['profileImageUrl'];
+    setState(() {
+      imageUrl = profileImageUrl;
+    });
+  }
+
+  Future<void> uploadProfilePicture() async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null && currentUser.uid == userEmail) {
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        File imageFile = File(pickedFile.path);
+        Reference ref = storage.ref().child('profile_images/$userEmail.jpg');
+        UploadTask uploadTask = ref.putFile(imageFile);
+        await uploadTask.whenComplete(() => null);
+        String downloadUrl = await ref.getDownloadURL();
+        setState(() {
+          imageUrl = downloadUrl;
+        });
+        await usersCollection
+            .doc(userEmail)
+            .update({'profileImageUrl': downloadUrl});
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,10 +132,23 @@ class _ProfilePageState extends State<ProfilePage> {
                         snapshot.data!.data() as Map<String, dynamic>;
                     return Column(
                       children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
                         //profile pic
-                        const Icon(Icons.person,
-                            size: 72, color: Color.fromARGB(255, 148, 13, 202)),
-
+                        GestureDetector(
+                            onTap: uploadProfilePicture,
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundImage: imageUrl != null
+                                  ? NetworkImage(imageUrl!)
+                                  : null,
+                              child: imageUrl == null
+                                  ? const Icon(Icons.person,
+                                      size: 72,
+                                      color: Color.fromARGB(255, 148, 13, 202))
+                                  : null,
+                            )),
                         const SizedBox(
                           height: 10,
                         ),
