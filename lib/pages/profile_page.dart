@@ -159,12 +159,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     final posts = snapshot.data!.docs;
                     return Column(
                       children: posts.map((post) {
+                        final data = post.data() as Map<String, dynamic>?;
+                        final imageUrl = data?['ImageUrl'];
                         return WallPost(
                           user: post['UserEmail'],
                           message: post['Message'],
                           postId: post.id,
                           likes: List<String>.from(post['Likes'] ?? []),
                           time: formatDate(post['TimeStamp']),
+                          imageUrl: imageUrl,
                         );
                       }).toList(), //display user posts
                       //get user post
