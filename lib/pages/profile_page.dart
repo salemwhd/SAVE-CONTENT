@@ -95,10 +95,13 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> uploadProfilePicture() async {
+    print('uploadProfilePicture called');
     User? currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null && currentUser.uid == userEmail) {
+    if (currentUser != null && currentUser.email == userEmail) {
+      print('User is authenticated and is viewing their own profile');
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
+        print('Image picked successfully');
         File imageFile = File(pickedFile.path);
         Reference ref = storage.ref().child('profile_images/$userEmail.jpg');
         UploadTask uploadTask = ref.putFile(imageFile);
