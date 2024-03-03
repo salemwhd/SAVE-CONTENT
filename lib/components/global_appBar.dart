@@ -38,13 +38,18 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
                 String? profilePicUrl = data['profileImageUrl'];
 
                 return CircleAvatar(
-                  backgroundImage: profilePicUrl != null
-                      ? NetworkImage(profilePicUrl)
-                      : null,
+                  child: profilePicUrl != null
+                      ? ClipOval(
+                          child: Image(
+                            image: NetworkImage(profilePicUrl),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : const Icon(Icons.account_circle),
                 );
               },
             )
-          : const Icon(Icons.account_circle),
+          : null,
       title: Text(
         title,
         style: const TextStyle(

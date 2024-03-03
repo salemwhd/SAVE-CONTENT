@@ -20,6 +20,30 @@ class _NewPostScreenState extends State<NewPostScreen> {
   final textController = TextEditingController();
   final currentUser = FirebaseAuth.instance.currentUser!;
   String? _pickedImagePath;
+  int wordCount = 0; // New state variable
+  bool isTextCopyrighted = false;
+  bool isImageCopyrighted = false;
+  @override
+  void initState() {
+    super.initState();
+    textController
+        .addListener(_updateWordCount); // Add listener to textController
+  }
+
+  @override
+  void dispose() {
+    textController.removeListener(_updateWordCount); // Remove listener
+    super.dispose();
+  }
+
+  void _updateWordCount() {
+    setState(() {
+      wordCount = textController.text
+          .split(' ')
+          .where((word) => word.isNotEmpty)
+          .length;
+    });
+  }
 
   void postMessage() async {
     if (textController.text.isNotEmpty) {
@@ -97,19 +121,68 @@ class _NewPostScreenState extends State<NewPostScreen> {
                   ),
                 ],
               ),
-              if (_pickedImagePath != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Image.file(
-                    File(_pickedImagePath!),
-                    height: 300, // you can adjust the size as needed
-                    width: double.infinity,
-                    fit: BoxFit.fill,
+              //make it in left
+              Row(
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('Text Copyright'),
+                      Checkbox(
+                        value: isTextCopyrighted,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isTextCopyrighted = value ?? false;
+                          });
+                        },
+                      ),
+                    ],
                   ),
+                  const SizedBox(width: 100),
+                  Text('Word count: $wordCount'),
+                ],
+              ),
+              if (_pickedImagePath != null)
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: Image.file(
+                        File(_pickedImagePath!),
+                        height: 300, // you can adjust the size as needed
+                        width: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text('Image Copyright'),
+                        Checkbox(
+                          value: isImageCopyrighted,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              isImageCopyrighted = value ?? false;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               const SizedBox(height: 16.0),
               PostButton(
-                onPressed: postMessage,
+                onPressed: () {
+                  if (!isTextCopyrighted || wordCount >= 100) {
+                    postMessage();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please enter at least 100 words'),
+                      ),
+                    );
+                  }
+                },
               )
             ],
           ),
