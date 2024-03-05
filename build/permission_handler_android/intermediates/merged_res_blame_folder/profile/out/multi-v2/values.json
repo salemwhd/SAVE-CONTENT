@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\build\\permission_handler_android\\intermediates\\incremental\\mergeProfileResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\build\\permission_handler_android\\intermediates\\incremental\\mergeProfileResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\salem\\.gradle\\caches\\transforms-3\\e83da32206ba212eb5ce229818cd19a6\\transformed\\jetified-window-1.0.0-beta04\\res\\values\\values.xml",
@@ -44,7 +44,7 @@
             ]
         },
         {
-            "outputFile": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\build\\permission_handler_android\\intermediates\\merged_res\\profile\\values\\values.xml",
+            "outputFile": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\build\\permission_handler_android\\intermediates\\merged_res\\profile\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\salem\\.gradle\\caches\\transforms-3\\e83da32206ba212eb5ce229818cd19a6\\transformed\\jetified-window-1.0.0-beta04\\res\\values\\values.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\EDUCATIONAL\\level 4\\graduation project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeProfileResources\\merged.dir\\values-af\\values-af.xml",
+            "outputFile": "D:\\EDUCATIONAL\\level 4\\project\\CONTGUARD\\build\\app\\intermediates\\incremental\\mergeProfileResources\\merged.dir\\values-af\\values-af.xml",
             "map": [
                 {
                     "source": "C:\\Users\\salem\\.gradle\\caches\\transforms-3\\4e703315998ecf376ba7c67308cbe289\\transformed\\browser-1.4.0\\res\\values-af\\values-af.xml",

@@ -1,1 +1,0 @@
- D:\\EDUCATIONAL\\level\ 4\\graduation\ project\\CONTGUARD\\.dart_tool\\flutter_build\\ab20f263ac812351687fc25c8604f8eb\\native_assets.yaml: 

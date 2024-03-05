@@ -29,7 +29,7 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/launcher_icon"
-        android:label="CONTGUARD"
+        android:label="SAVECONTENT"
         android:requestLegacyExternalStorage="true" >
         <activity
             android:name="com.example.CONTGUARD.MainActivity"
