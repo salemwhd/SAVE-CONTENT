@@ -53,87 +53,99 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white54,
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //logo
-                  const Icon(
-                    Icons.lock,
-                    size: 100,
-                  ),
+      body: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromARGB(255, 167, 79, 226),
+              Color.fromARGB(255, 80, 10, 126),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    //logo
+                    const Icon(
+                      Icons.lock,
+                      size: 100,
+                    ),
 
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  //welcome back message
-                  Text(
-                    "Welcome back, You've been missed",
-                    style: TextStyle(color: Colors.grey[700]),
-                  ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    //welcome back message
+                    const Text(
+                      "Welcome back, You've been missed",
+                      style: TextStyle(color: Colors.black),
+                    ),
 
-                  const SizedBox(
-                    height: 25,
-                  ),
+                    const SizedBox(
+                      height: 25,
+                    ),
 
-                  //email textfield
+                    //email textfield
 
-                  MyTextField(
-                      controller: emailTextController,
-                      hintText: 'Email',
-                      obscureText: false),
+                    MyTextField(
+                        controller: emailTextController,
+                        hintText: 'Email',
+                        obscureText: false),
 
-                  const SizedBox(
-                    height: 10,
-                  ),
+                    const SizedBox(
+                      height: 10,
+                    ),
 
-                  //password textfield
+                    //password textfield
 
-                  MyTextField(
-                      controller: passwordTextController,
-                      hintText: 'Password',
-                      obscureText: true),
+                    MyTextField(
+                        controller: passwordTextController,
+                        hintText: 'Password',
+                        obscureText: true),
 
-                  const SizedBox(
-                    height: 10,
-                  ),
+                    const SizedBox(
+                      height: 10,
+                    ),
 
-                  //sign in button
+                    //sign in button
 
-                  MyButton(onTap: signIn, text: 'Sign In'),
+                    MyButton(onTap: signIn, text: 'Sign In'),
 
-                  const SizedBox(
-                    height: 25,
-                  ),
+                    const SizedBox(
+                      height: 25,
+                    ),
 
-                  //go to register page
+                    //go to register page
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Not a Member ?",
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      GestureDetector(
-                          onTap: widget.onTap,
-                          child: const Text(
-                            "Register Now",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
-                          )),
-                    ],
-                  )
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Not a Member ?",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        GestureDetector(
+                            onTap: widget.onTap,
+                            child: const Text(
+                              "Register Now",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue),
+                            )),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
