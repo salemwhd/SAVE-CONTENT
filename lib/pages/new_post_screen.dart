@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,7 +47,39 @@ class _NewPostScreenState extends State<NewPostScreen> {
     });
   }
 
+  Future<Map<String, dynamic>> calculateSimilarity(String inputText) async {
+    late http.Response response;
+    try {
+      response = await http.post(
+        Uri.parse('http://10.0.2.2:5000/api/similarity'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'input_text': inputText,
+        }),
+      );
+    } catch (e) {
+      print('Caught exception: $e');
+    }
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      print('Failed to calculate similarity');
+      throw Exception('Failed to calculate similarity');
+    }
+  }
+
   void postMessage() async {
+    String inputText = textController.text;
+    // Calculate similarity
+    Map<String, dynamic> similarityScores =
+        await calculateSimilarity(inputText);
+
+    // Print the similarity scores
+    print(similarityScores['similarity_scores']);
+
     if (textController.text.isNotEmpty) {
       String? imageUrl;
       if (_pickedImagePath != null) {
