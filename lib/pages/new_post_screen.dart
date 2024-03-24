@@ -51,7 +51,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
     late http.Response response;
     try {
       response = await http.post(
-        Uri.parse('http://10.0.2.2:5000/api/similarity'),
+        Uri.parse('https://vast-beyond-56630-cb24d6502d9e.herokuapp.com/api/similarity'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -101,12 +101,36 @@ class _NewPostScreenState extends State<NewPostScreen> {
         'ImageUrl': imageUrl,
       });
 
+      // Use a Builder widget to get the correct context
+
       setState(() {
         textController.clear();
         _pickedImagePath = null;
       });
       Navigator.pop(context);
     }
+
+    _showSimilarityScores(similarityScores);
+  }
+
+  void _showSimilarityScores(Map<String, dynamic> similarityScores) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Similarity Scores'),
+          content: Text(jsonEncode(similarityScores)),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _requestGalleryPermission() async {
