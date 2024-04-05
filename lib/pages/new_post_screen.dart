@@ -51,7 +51,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
     late http.Response response;
     try {
       response = await http.post(
-        Uri.parse('https://vast-beyond-56630-cb24d6502d9e.herokuapp.com/api/similarity'),
+        Uri.parse(
+            'https://vast-beyond-56630-cb24d6502d9e.herokuapp.com/api/similarity'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -71,14 +72,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
     }
   }
 
-  void postMessage() async {
+  void postMessage(bool isTextCopyrighted, bool isImageCopyrighted) async {
     String inputText = textController.text;
-    // Calculate similarity
-    Map<String, dynamic> similarityScores =
-        await calculateSimilarity(inputText);
-
-    // Print the similarity scores
-    print(similarityScores['similarity_scores']);
 
     if (textController.text.isNotEmpty) {
       String? imageUrl;
@@ -99,18 +94,20 @@ class _NewPostScreenState extends State<NewPostScreen> {
         'TimeStamp': Timestamp.now(),
         'Likes': [],
         'ImageUrl': imageUrl,
+        'isTextCopyrighted': isTextCopyrighted,
+        'isImageCopyrighted': isImageCopyrighted,
       });
-
-      // Use a Builder widget to get the correct context
-
       setState(() {
         textController.clear();
         _pickedImagePath = null;
       });
       Navigator.pop(context);
     }
-
-    _showSimilarityScores(similarityScores);
+    if (isTextCopyrighted) {
+      Map<String, dynamic> similarityScores =
+          await calculateSimilarity(inputText);
+      _showSimilarityScores(similarityScores);
+    }
   }
 
   void _showSimilarityScores(Map<String, dynamic> similarityScores) {
@@ -174,12 +171,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.photo),
+                    icon: const Icon(Icons.photo),
                     onPressed: _pickImage,
                   ),
                 ],
               ),
-              //make it in left
               Row(
                 children: [
                   Row(
@@ -232,7 +228,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
               PostButton(
                 onPressed: () {
                   if (!isTextCopyrighted || wordCount >= 100) {
-                    postMessage();
+                    postMessage(isTextCopyrighted, isImageCopyrighted);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
