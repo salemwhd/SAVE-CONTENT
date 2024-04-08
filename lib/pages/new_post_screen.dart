@@ -96,6 +96,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
         'ImageUrl': imageUrl,
         'isTextCopyrighted': isTextCopyrighted,
         'isImageCopyrighted': isImageCopyrighted,
+        
       });
       setState(() {
         textController.clear();

@@ -90,6 +90,10 @@ class _HomePageState extends State<HomePage> {
                         imageUrl: post.data().containsKey('ImageUrl')
                             ? post['ImageUrl']
                             : null,
+                        originalAuthor:
+                            post.data().containsKey('OriginalAuthor')
+                                ? post['OriginalAuthor']
+                                : null,
                       );
                     },
                   );
@@ -100,9 +104,6 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             )),
-
-            //post message
-
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(

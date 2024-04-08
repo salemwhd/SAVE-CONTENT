@@ -14,7 +14,7 @@ class WallPost extends StatefulWidget {
   final String postId;
   final List<String> likes;
   final String? imageUrl;
-
+  final String? originalAuthor;
   const WallPost({
     super.key,
     required this.user,
@@ -23,6 +23,7 @@ class WallPost extends StatefulWidget {
     required this.postId,
     required this.likes,
     this.imageUrl,
+    this.originalAuthor,
   });
 
   @override
@@ -124,6 +125,25 @@ class _WallPostState extends State<WallPost> {
         .delete();
   }
 
+  void sharePost() async {
+    final currentUserEmail = FirebaseAuth.instance.currentUser!.email;
+    final postsCollection = FirebaseFirestore.instance.collection('User Posts');
+    final newPostId = postsCollection.doc().id;
+
+    await postsCollection.doc(newPostId).set({
+      'UserEmail': currentUserEmail,
+      'Message': widget.message,
+      'Likes': [],
+      'TimeStamp': Timestamp.now(),
+      'ImageUrl': widget.imageUrl,
+      'OriginalAuthor': widget.user,
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Post has been shared!')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // final image = widget.image;
@@ -165,9 +185,13 @@ class _WallPostState extends State<WallPost> {
               const SizedBox(
                 height: 5,
               ),
-
               Row(
                 children: [
+                   if (widget.originalAuthor != null)
+                    Text(
+                      'Shared from ${widget.originalAuthor}',
+                      style: const TextStyle(color: Colors.grey),
+                    )else
                   Text(
                     widget.user,
                     style: const TextStyle(color: Colors.grey),
@@ -176,6 +200,7 @@ class _WallPostState extends State<WallPost> {
                     " . ",
                     style: TextStyle(color: Colors.grey),
                   ),
+                 
                   Text(
                     widget.time,
                     style: const TextStyle(color: Colors.grey),
@@ -245,6 +270,11 @@ class _WallPostState extends State<WallPost> {
                         ),
                       ],
                     ),
+                  IconButton(
+                    icon: const Icon(Icons.screen_share_rounded,
+                        color: Colors.blue),
+                    onPressed: sharePost,
+                  ),
                 ],
               ),
               const SizedBox(
