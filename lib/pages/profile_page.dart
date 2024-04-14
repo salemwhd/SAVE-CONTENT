@@ -8,7 +8,6 @@ import 'package:CONTGUARD/components/global_appBar.dart';
 import 'package:CONTGUARD/components/text_box.dart';
 import 'package:CONTGUARD/components/wall_post.dart';
 import 'package:CONTGUARD/helper/helper_method.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:CONTGUARD/components/my_follow_button.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -223,6 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           likes: List<String>.from(post['Likes'] ?? []),
                           time: formatDate(post['TimeStamp']),
                           imageUrl: imageUrl,
+                          originalAuthor: data?['OriginalAuthor'],
                         );
                       }).toList(), //display user posts
                       //get user post

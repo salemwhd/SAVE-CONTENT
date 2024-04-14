@@ -33,6 +33,8 @@ class WallPost extends StatefulWidget {
 class _WallPostState extends State<WallPost> {
   //user
   final currentUser = FirebaseAuth.instance.currentUser!;
+  late final String userEmail;
+
   bool isLiked = false;
 
   //comment text controller
@@ -42,6 +44,7 @@ class _WallPostState extends State<WallPost> {
   void initState() {
     super.initState();
     isLiked = widget.likes.contains(currentUser.email);
+    userEmail = widget.user;
   }
 
   //toggle like
@@ -144,178 +147,209 @@ class _WallPostState extends State<WallPost> {
     );
   }
 
+  Future<String> fetchProfilePic(String userEmail) async {
+    final userDoc = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userEmail)
+        .get();
+
+    return userDoc.get('profileImageUrl') as String;
+  }
+
   @override
   Widget build(BuildContext context) {
     // final image = widget.image;
-    return Container(
-      decoration: BoxDecoration(
-        //color: Color.fromARGB(255, 80, 10, 126),
-        borderRadius: BorderRadius.circular(8),
-        gradient: const LinearGradient(
-          colors: [
-            Color.fromARGB(255, 167, 79, 226),
-            Color.fromARGB(255, 80, 10, 126),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
-      margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
-      padding: const EdgeInsets.all(25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (widget.imageUrl != null) Image.network(widget.imageUrl!),
-          const SizedBox(
-            width: 20,
-          ),
+    return FutureBuilder<String>(
+        future: fetchProfilePic(widget.user),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          final profilePicUrl = snapshot.data;
 
-          //message and user email
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.message,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white),
-              ),
-
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                   if (widget.originalAuthor != null)
-                    Text(
-                      'Shared from ${widget.originalAuthor}',
-                      style: const TextStyle(color: Colors.grey),
-                    )else
-                  Text(
-                    widget.user,
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                  const Text(
-                    " . ",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                 
-                  Text(
-                    widget.time,
-                    style: const TextStyle(color: Colors.grey),
-                  ),
+          return Container(
+            decoration: BoxDecoration(
+              //color: Color.fromARGB(255, 80, 10, 126),
+              borderRadius: BorderRadius.circular(8),
+              gradient: const LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 167, 79, 226),
+                  Color.fromARGB(255, 80, 10, 126),
                 ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-
-              const SizedBox(
-                height: 20,
-              ),
-              //buttons
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //LIKE
-                  Column(
-                    children: [
-                      //like button
-                      LikeButton(isLiked: isLiked, onTap: toggleLike),
-
-                      const SizedBox(
-                        height: 5,
-                      ),
-
-                      //like count
-
-                      Text(widget.likes.length.toString())
-                    ],
+            ),
+            margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
+            padding: const EdgeInsets.all(25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (profilePicUrl != null)
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      profilePicUrl,
+                    ),
+                    radius: 30,
+                  )
+                else
+                  const Icon(
+                    Icons.person,
+                    size: 30,
                   ),
+                if (widget.imageUrl != null) Image.network(widget.imageUrl!),
+                const SizedBox(
+                  width: 20,
+                ),
 
-                  const SizedBox(
-                    width: 10,
-                  ),
+                //message and user email
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.message,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.white),
+                    ),
 
-                  //COMMENT
-                  Column(
-                    children: [
-                      //comment button
-                      CommentButton(onTap: showCommentDialog),
-
-                      const SizedBox(
-                        height: 5,
-                      ),
-
-                      //comment count
-
-                      const Text(
-                        '0',
-                        style: TextStyle(color: Colors.blue),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  if (currentUser.email == widget.user)
-                    Column(
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
                       children: [
-                        // delete button
-                        IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
-                          onPressed: deletePost,
+                        if (widget.originalAuthor != null)
+                          Text(
+                            'Shared from ${widget.originalAuthor}',
+                            style: const TextStyle(color: Colors.grey),
+                          )
+                        else
+                          Text(
+                            widget.user,
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        const Text(
+                          " . ",
+                          style: TextStyle(color: Colors.grey),
                         ),
-                        const SizedBox(
-                          height: 10,
+                        Text(
+                          widget.time,
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       ],
                     ),
-                  IconButton(
-                    icon: const Icon(Icons.screen_share_rounded,
-                        color: Colors.blue),
-                    onPressed: sharePost,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
 
-              //comments under the post
-              StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection("User Posts")
-                      .doc(widget.postId)
-                      .collection("Comments")
-                      .orderBy("CommentTime", descending: true)
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    //show loading circle if no data yet
-                    if (!snapshot.hasData) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    //buttons
 
-                    return ListView(
-                      shrinkWrap: true, //for nested lists
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: snapshot.data!.docs.map((doc) {
-                        //get the comment
-                        final commentData = doc.data() as Map<String, dynamic>;
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        //LIKE
+                        Column(
+                          children: [
+                            //like button
+                            LikeButton(isLiked: isLiked, onTap: toggleLike),
 
-                        //return the comment
-                        return Comment(
-                            text: commentData["CommentText"],
-                            user: commentData["CommentedBy"],
-                            time: formatDate(commentData["CommentTime"]));
-                      }).toList(),
-                    );
-                  })
-            ],
-          )
-        ],
-      ),
-    );
+                            const SizedBox(
+                              height: 5,
+                            ),
+
+                            //like count
+
+                            Text(widget.likes.length.toString())
+                          ],
+                        ),
+
+                        const SizedBox(
+                          width: 10,
+                        ),
+
+                        //COMMENT
+                        Column(
+                          children: [
+                            //comment button
+                            CommentButton(onTap: showCommentDialog),
+
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        if (currentUser.email == widget.user)
+                          Column(
+                            children: [
+                              // delete button
+                              IconButton(
+                                icon: Icon(Icons.delete, color: Colors.red),
+                                onPressed: deletePost,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        Column(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.screen_share_rounded,
+                                  color: Colors.blue),
+                              onPressed: sharePost,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    //comments under the post
+                    StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("User Posts")
+                            .doc(widget.postId)
+                            .collection("Comments")
+                            .orderBy("CommentTime", descending: true)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          //show loading circle if no data yet
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
+                          return ListView(
+                            shrinkWrap: true, //for nested lists
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: snapshot.data!.docs.map((doc) {
+                              //get the comment
+                              final commentData =
+                                  doc.data() as Map<String, dynamic>;
+
+                              //return the comment
+                              return Comment(
+                                  text: commentData["CommentText"],
+                                  user: commentData["CommentedBy"],
+                                  time: formatDate(commentData["CommentTime"]));
+                            }).toList(),
+                          );
+                        })
+                  ],
+                )
+              ],
+            ),
+          );
+        });
   }
 }
