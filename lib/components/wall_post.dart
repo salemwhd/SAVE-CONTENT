@@ -1,3 +1,4 @@
+import 'package:CONTGUARD/pages/profile_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -156,6 +157,17 @@ class _WallPostState extends State<WallPost> {
     return userDoc.get('profileImageUrl') as String;
   }
 
+  void goToProfilePage(BuildContext ctx) {
+    Navigator.push(
+      ctx,
+      MaterialPageRoute(
+        builder: (ctx) => ProfilePage(
+          userId: userEmail,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // final image = widget.image;
@@ -163,7 +175,7 @@ class _WallPostState extends State<WallPost> {
         future: fetchProfilePic(widget.user),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           final profilePicUrl = snapshot.data;
 
@@ -186,16 +198,26 @@ class _WallPostState extends State<WallPost> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (profilePicUrl != null)
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      profilePicUrl,
+                  InkWell(
+                    onTap: (() {
+                      goToProfilePage(context);
+                    }),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        profilePicUrl,
+                      ),
+                      radius: 30,
                     ),
-                    radius: 30,
                   )
                 else
-                  const Icon(
-                    Icons.person,
-                    size: 30,
+                  InkWell(
+                    onTap: (() {
+                      goToProfilePage(context);
+                    }),
+                    child: const Icon(
+                      Icons.person,
+                      size: 30,
+                    ),
                   ),
                 if (widget.imageUrl != null) Image.network(widget.imageUrl!),
                 const SizedBox(
@@ -287,7 +309,8 @@ class _WallPostState extends State<WallPost> {
                             children: [
                               // delete button
                               IconButton(
-                                icon: Icon(Icons.delete, color: Colors.red),
+                                icon:
+                                    const Icon(Icons.delete, color: Colors.red),
                                 onPressed: deletePost,
                               ),
                               const SizedBox(

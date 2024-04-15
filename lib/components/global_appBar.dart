@@ -6,7 +6,7 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GlobalAppBar({super.key, required this.title});
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   final String title;
   void signOut() {
@@ -30,7 +30,7 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
                 }
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
 
                 Map<String, dynamic> data =
@@ -56,7 +56,7 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
       ),
       backgroundColor: const Color.fromARGB(255, 135, 1, 172),
-      actions: [IconButton(onPressed: signOut, icon: Icon(Icons.logout))],
+      actions: [IconButton(onPressed: signOut, icon: const Icon(Icons.logout))],
     );
   }
 }

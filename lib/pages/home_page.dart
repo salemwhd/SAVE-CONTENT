@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return NewPostScreen(); // Navigate to the NewPostScreen
+        return const NewPostScreen(); // Navigate to the NewPostScreen
       },
     );
   }
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
               },
             )),

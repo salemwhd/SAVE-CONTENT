@@ -116,11 +116,11 @@ class _NewPostScreenState extends State<NewPostScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Similarity Scores'),
+          title: const Text('Similarity Scores'),
           content: Text(jsonEncode(similarityScores)),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

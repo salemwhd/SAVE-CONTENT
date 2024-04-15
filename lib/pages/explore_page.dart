@@ -47,7 +47,7 @@ class ExplorePage extends StatelessWidget {
                   future: fetchProfilePic(userId),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
 
                     final profilePicUrl = snapshot.data;

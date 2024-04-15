@@ -17,7 +17,7 @@ class MyListTile extends StatelessWidget {
           color: Colors.white,
         ),
         onTap: onTap,
-        title: Text(text,style: TextStyle(color: Colors.white),),
+        title: Text(text,style: const TextStyle(color: Colors.white),),
       ),
     );
   }

@@ -13,7 +13,7 @@ class UserTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.person),
+      leading: const Icon(Icons.person),
       title: Text(username),
       subtitle: Text(bio),
     );

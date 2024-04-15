@@ -15,8 +15,8 @@ class MyTextBox extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(8)),
-      padding: EdgeInsets.only(left: 15, bottom: 15),
-      margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: const EdgeInsets.only(left: 15, bottom: 15),
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,8 +32,8 @@ class MyTextBox extends StatelessWidget {
               //edit button
               IconButton(
                   onPressed: onPressed,
-                  icon: Icon(Icons.settings),
-                  color: Color.fromRGBO(118, 5, 163, 1))
+                  icon: const Icon(Icons.settings),
+                  color: const Color.fromRGBO(118, 5, 163, 1))
             ],
           ),
 
