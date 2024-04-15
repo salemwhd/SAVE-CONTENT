@@ -10,6 +10,13 @@ class ExplorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final users = FirebaseFirestore.instance.collection('Users');
+    Future<String> fetchProfilePic(String userEmail) async {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userEmail)
+          .get();
+      return userDoc.get('profileImageUrl') as String;
+    }
 
     return Scaffold(
       appBar: const GlobalAppBar(title: 'Explore New Friends'),
@@ -35,9 +42,26 @@ class ExplorePage extends StatelessWidget {
             itemBuilder: (context, index) {
               final user = usersData[index].data() as Map<String, dynamic>;
               final userId = usersData[index].id; // Get the document ID
-
               return ListTile(
-                leading: Icon(Icons.person),
+                leading: FutureBuilder<String>(
+                  future: fetchProfilePic(userId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+
+                    final profilePicUrl = snapshot.data;
+
+                    return CircleAvatar(
+                      backgroundImage: profilePicUrl != null
+                          ? NetworkImage(profilePicUrl)
+                          : null,
+                      child: profilePicUrl == null
+                          ? const Icon(Icons.person)
+                          : null,
+                    );
+                  },
+                ),
                 title: Text(user['username']),
                 trailing: MyFollowButton(userId: userId),
                 onTap: () {

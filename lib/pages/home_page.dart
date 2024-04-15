@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field
 
-import 'package:CONTGUARD/pages/new_post_screen.dart';
+import 'package:CONTGUARD/pages/new_post_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

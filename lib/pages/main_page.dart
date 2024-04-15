@@ -1,3 +1,4 @@
+import 'package:CONTGUARD/pages/notifications_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:CONTGUARD/pages/explore_page.dart';
@@ -23,6 +24,7 @@ class _MainPageState extends State<MainPage> {
     _widgetOptions = <Widget>[
       const HomePage(),
       ProfilePage(userId: userEmail),
+      const NotificationsPage(),
       const ExplorePage(),
     ];
   }
@@ -49,12 +51,17 @@ class _MainPageState extends State<MainPage> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notifications',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.explore),
             label: 'Explore',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
+        unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),
     );
