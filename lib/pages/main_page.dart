@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
     _widgetOptions = <Widget>[
       const HomePage(),
       ProfilePage(userId: userEmail),
-      const NotificationsPage(),
+       NotificationsPage(),
       const ExplorePage(),
     ];
   }

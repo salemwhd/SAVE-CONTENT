@@ -5,61 +5,76 @@ import 'package:flutter/material.dart';
 class MyFollowButton extends StatefulWidget {
   final String userId;
 
-  const MyFollowButton({super.key, required this.userId});
+  const MyFollowButton({Key? key, required this.userId}) : super(key: key);
 
   @override
-  State<MyFollowButton> createState() => _MyFollowButtonState();
+  _MyFollowButtonState createState() => _MyFollowButtonState();
 }
 
 class _MyFollowButtonState extends State<MyFollowButton> {
   bool isFollowing = false;
-  List<String> following = [];
-  final usersCollection = FirebaseFirestore.instance.collection('Users');
-  late final String userEmail;
+  bool isPending = false;
 
   @override
   void initState() {
     super.initState();
-    userEmail = widget.userId;
-    fetchFollowing();
+    checkFollowStatus();
+  }
+
+  Future<void> checkFollowStatus() async {
+    final currentUserEmail = FirebaseAuth.instance.currentUser!.email;
+    final currentUserDoc = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(currentUserEmail)
+        .get();
+
+    if (currentUserDoc.exists) {
+      final following = List<String>.from(
+          (currentUserDoc.data() as Map<String, dynamic>)['Following'] ?? []);
+      final requestsSent = List<String>.from(
+          (currentUserDoc.data() as Map<String, dynamic>)['RequestsSent'] ??
+              []);
+
+      setState(() {
+        isFollowing = following.contains(widget.userId);
+        isPending = requestsSent.contains(widget.userId);
+      });
+    }
   }
 
   Future<void> sendFollowRequest() async {
     final currentUserEmail = FirebaseAuth.instance.currentUser!.email;
-    DocumentSnapshot currentUserDoc =
-        await usersCollection.doc(currentUserEmail).get();
-    List<String> requestsSent =
-        List<String>.from(currentUserDoc['RequestsSent']);
 
-    if (requestsSent.contains(userEmail)) {
-      // Follow request is already pending
-      return;
-    }
-
-    await usersCollection.doc(userEmail).update({
-      'followRequests': FieldValue.arrayUnion([currentUserEmail])
+    // Add the target user to the RequestsSent list in the current user's document.
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(currentUserEmail)
+        .update({
+      'RequestsSent': FieldValue.arrayUnion([widget.userId]),
     });
 
-    await usersCollection.doc(currentUserEmail).update({
-      'RequestsSent': FieldValue.arrayUnion([userEmail])
+    // Add the current user to the followRequests list in the target user's document.
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(widget.userId)
+        .update({
+      'followRequests': FieldValue.arrayUnion([currentUserEmail]),
     });
 
-    setState(() {
-      isFollowing = !isFollowing;
-    });
+    checkFollowStatus();
   }
 
-  Future<void> fetchFollowing() async {
+  Future<void> unfollow() async {
     final currentUserEmail = FirebaseAuth.instance.currentUser!.email;
-    DocumentSnapshot currentUserDoc =
-        await usersCollection.doc(currentUserEmail).get();
-    if (currentUserDoc.exists) {
-      setState(() {
-        following = List<String>.from(
-            (currentUserDoc.data() as Map<String, dynamic>)['Following'] ?? []);
-        isFollowing = following.contains(userEmail);
-      });
-    }
+
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(currentUserEmail)
+        .update({
+      'Following': FieldValue.arrayRemove([widget.userId]),
+    });
+
+    checkFollowStatus();
   }
 
   @override
@@ -68,8 +83,10 @@ class _MyFollowButtonState extends State<MyFollowButton> {
 
     return currentUserEmail != widget.userId
         ? ElevatedButton(
-            onPressed: () => sendFollowRequest(),
-            child: Text(isFollowing ? 'Unfollow' : 'Follow'),
+            onPressed:
+                isFollowing ? unfollow : (isPending ? null : sendFollowRequest),
+            child: Text(
+                isFollowing ? 'Unfollow' : (isPending ? 'Pending' : 'Follow')),
           )
         : const SizedBox.shrink(); // Replace this with your preferred widget
   }
