@@ -1,4 +1,5 @@
 import 'package:CONTGUARD/components/global_appBar.dart';
+import 'package:CONTGUARD/components/notification.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsPage extends StatelessWidget {
@@ -7,13 +8,12 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: GlobalAppBar(title: 'Notifications'),
-      body: Center(child: Text('hello')),
-    );
+        appBar: GlobalAppBar(title: 'Notifications'),
+        body: Column(
+          
+          children: [
+            NotificationBar(),
+          ],
+        ));
   }
 }
-
-
-
-
-

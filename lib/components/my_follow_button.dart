@@ -24,27 +24,26 @@ class _MyFollowButtonState extends State<MyFollowButton> {
     fetchFollowing();
   }
 
-  Future<void> toggleFollow() async {
+  Future<void> sendFollowRequest() async {
     final currentUserEmail = FirebaseAuth.instance.currentUser!.email;
     DocumentSnapshot currentUserDoc =
         await usersCollection.doc(currentUserEmail).get();
-    List<String> following = List<String>.from(currentUserDoc['Following']);
+    List<String> requestsSent =
+        List<String>.from(currentUserDoc['RequestsSent']);
 
-    if (following.contains(userEmail)) {
-      await usersCollection.doc(currentUserEmail).update({
-        'Following': FieldValue.arrayRemove([userEmail])
-      });
-      await usersCollection.doc(userEmail).update({
-        'Followers': FieldValue.arrayRemove([currentUserEmail])
-      });
-    } else {
-      await usersCollection.doc(currentUserEmail).update({
-        'Following': FieldValue.arrayUnion([userEmail])
-      });
-      await usersCollection.doc(userEmail).update({
-        'Followers': FieldValue.arrayUnion([currentUserEmail])
-      });
+    if (requestsSent.contains(userEmail)) {
+      // Follow request is already pending
+      return;
     }
+
+    await usersCollection.doc(userEmail).update({
+      'followRequests': FieldValue.arrayUnion([currentUserEmail])
+    });
+
+    await usersCollection.doc(currentUserEmail).update({
+      'RequestsSent': FieldValue.arrayUnion([userEmail])
+    });
+
     setState(() {
       isFollowing = !isFollowing;
     });
@@ -69,7 +68,7 @@ class _MyFollowButtonState extends State<MyFollowButton> {
 
     return currentUserEmail != widget.userId
         ? ElevatedButton(
-            onPressed: () => toggleFollow(),
+            onPressed: () => sendFollowRequest(),
             child: Text(isFollowing ? 'Unfollow' : 'Follow'),
           )
         : const SizedBox.shrink(); // Replace this with your preferred widget
