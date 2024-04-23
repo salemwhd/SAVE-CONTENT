@@ -58,7 +58,7 @@ class _MyFollowButtonState extends State<MyFollowButton> {
         .collection('Users')
         .doc(widget.userId)
         .update({
-      'followRequests': FieldValue.arrayUnion([currentUserEmail]),
+      'RequestsReceived': FieldValue.arrayUnion([currentUserEmail]),
     });
 
     checkFollowStatus();

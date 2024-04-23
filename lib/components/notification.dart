@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 class NotificationBar extends StatefulWidget {
-  const NotificationBar({super.key, required this.request});
+  const NotificationBar({
+    super.key,
+    required this.request,
+    required this.acceptRequest,
+    required this.ignoreRequest,
+  });
   final String request;
-
+  final Function(String) acceptRequest;
+  final Function(String) ignoreRequest;
   @override
   State<NotificationBar> createState() => _NotificationBarState();
 }
 
 class _NotificationBarState extends State<NotificationBar> {
+  bool requestHandled = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,21 +34,33 @@ class _NotificationBarState extends State<NotificationBar> {
                 Text('Friend request from ${widget.request}'),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue)),
-                  child: const Text('Accept'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('ignore'),
-                ),
-              ],
-            )
+            if (!requestHandled)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      widget.acceptRequest(widget.request);
+                      setState(() {
+                        requestHandled = true;
+                      });
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.blue)),
+                    child: const Text('Accept'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      widget.ignoreRequest(widget.request);
+                      setState(() {
+                        requestHandled = true;
+                      });
+                    },
+                    child: const Text('Ignore'),
+                  ),
+                ],
+              )
           ],
         ),
       ),
