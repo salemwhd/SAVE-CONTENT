@@ -96,7 +96,6 @@ class _NewPostScreenState extends State<NewPostScreen> {
         'ImageUrl': imageUrl,
         'isTextCopyrighted': isTextCopyrighted,
         'isImageCopyrighted': isImageCopyrighted,
-        
       });
       setState(() {
         textController.clear();
@@ -169,6 +168,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                       controller: textController,
                       hintText: "Write something on the wall...",
                       obscureText: false,
+                      maxLines: 4,
                     ),
                   ),
                   IconButton(

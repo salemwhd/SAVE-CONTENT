@@ -64,7 +64,20 @@ class _NotificationsPageState extends State<NotificationsPage> {
     });
   }
 
-  Future<void> ignoreRequest(String request) async {}
+  Future<void> ignoreRequest(String request) async {
+    DocumentReference currentUserDoc =
+        FirebaseFirestore.instance.collection('users').doc(currentUserEmail);
+    DocumentReference requestedUserDoc =
+        FirebaseFirestore.instance.collection('users').doc(request);
+
+    await currentUserDoc.update({
+      'RequestsReceived': FieldValue.arrayRemove([request])
+    });
+
+    await requestedUserDoc.update({
+      'RequestsSent': FieldValue.arrayRemove([currentUserEmail])
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

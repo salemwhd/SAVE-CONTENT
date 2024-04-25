@@ -4,11 +4,13 @@ class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
+  final int? maxLines;
   const MyTextField(
       {super.key,
       required this.controller,
       required this.hintText,
-      required this.obscureText});
+      required this.obscureText,
+      this.maxLines = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class MyTextField extends StatelessWidget {
           filled: true,
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey[500])),
+      maxLines: maxLines,
     );
   }
 }
