@@ -157,12 +157,12 @@ class _WallPostState extends State<WallPost> {
     return userDoc.get('profileImageUrl') as String;
   }
 
-  void goToProfilePage(BuildContext ctx) {
+  void goToProfilePage(BuildContext ctx, {String? userEmail}) {
     Navigator.push(
       ctx,
       MaterialPageRoute(
         builder: (ctx) => ProfilePage(
-          userId: userEmail,
+          userId: userEmail!,
         ),
       ),
     );
@@ -200,7 +200,7 @@ class _WallPostState extends State<WallPost> {
                 if (profilePicUrl != null)
                   InkWell(
                     onTap: (() {
-                      goToProfilePage(context);
+                      goToProfilePage(context, userEmail: userEmail);
                     }),
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(
@@ -212,7 +212,7 @@ class _WallPostState extends State<WallPost> {
                 else
                   InkWell(
                     onTap: (() {
-                      goToProfilePage(context);
+                      goToProfilePage(context, userEmail: userEmail);
                     }),
                     child: const Icon(
                       Icons.person,
@@ -242,9 +242,18 @@ class _WallPostState extends State<WallPost> {
                     Row(
                       children: [
                         if (widget.originalAuthor != null)
-                          Text(
-                            'Shared from ${widget.originalAuthor}',
-                            style: const TextStyle(color: Colors.grey),
+                          InkWell(
+                            onTap: () {
+                              goToProfilePage(context,
+                                  userEmail: widget.originalAuthor);
+                            },
+                            child: Text(
+                              'Shared from ${widget.originalAuthor}',
+                              style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           )
                         else
                           Text(

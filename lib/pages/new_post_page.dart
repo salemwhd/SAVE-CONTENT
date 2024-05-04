@@ -51,8 +51,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
     late http.Response response;
     try {
       response = await http.post(
-        Uri.parse(
-            'https://vast-beyond-56630-cb24d6502d9e.herokuapp.com/api/similarity'),
+        Uri.parse('http://10.0.2.2:5000/api/similarity'),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -101,33 +100,37 @@ class _NewPostScreenState extends State<NewPostScreen> {
         textController.clear();
         _pickedImagePath = null;
       });
-      Navigator.pop(context);
+      //Navigator.pop(context);
     }
     if (isTextCopyrighted) {
       Map<String, dynamic> similarityScores =
           await calculateSimilarity(inputText);
+      print('Similarity Scores: $similarityScores'); // Debugging line
       _showSimilarityScores(similarityScores);
+      print('Show Similarity Scores method executed'); // Debugging line
     }
   }
 
   void _showSimilarityScores(Map<String, dynamic> similarityScores) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Similarity Scores'),
-          content: Text(jsonEncode(similarityScores)),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Similarity Scores'),
+            content: Text(jsonEncode(similarityScores)),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Close'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   Future<void> _requestGalleryPermission() async {

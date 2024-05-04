@@ -8,8 +8,8 @@ import 'package:CONTGUARD/components/global_appBar.dart';
 import 'package:CONTGUARD/components/text_field.dart';
 import 'package:CONTGUARD/components/wall_post.dart';
 import 'package:CONTGUARD/helper/helper_method.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
+//import 'package:image_picker/image_picker.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,26 +25,6 @@ class _HomePageState extends State<HomePage> {
   //text controller
   final textController = TextEditingController();
   String? _pickedImagePath;
-
-  Future<void> _requestGalleryPermission() async {
-    var status = await Permission.photos.status;
-    if (status.isDenied) {
-      await Permission.photos.request();
-    }
-  }
-
-  Future<void> _pickImage() async {
-    await _requestGalleryPermission();
-
-    final imagePicker = ImagePicker();
-    final pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (pickedImage != null) {
-      // Update the variable with the picked image path
-      _pickedImagePath = pickedImage.path;
-    }
-  }
 
   // HomePage.dart
   void _openBottomSheet() {
@@ -69,41 +49,42 @@ class _HomePageState extends State<HomePage> {
           children: [
             //the wall
             Expanded(
-                child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection("User Posts")
-                  .orderBy("TimeStamp", descending: false)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      //get the post
-                      final post = snapshot.data!.docs[index];
-                      return WallPost(
-                        user: post['UserEmail'],
-                        message: post['Message'],
-                        postId: post.id,
-                        likes: List<String>.from(post['Likes'] ?? []),
-                        time: formatDate(post['TimeStamp']),
-                        imageUrl: post.data().containsKey('ImageUrl')
-                            ? post['ImageUrl']
-                            : null,
-                        originalAuthor:
-                            post.data().containsKey('OriginalAuthor')
-                                ? post['OriginalAuthor']
-                                : null,
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
-            )),
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection("User Posts")
+                    .orderBy("TimeStamp", descending: true)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        //get the post
+                        final post = snapshot.data!.docs[index];
+                        return WallPost(
+                          user: post['UserEmail'],
+                          message: post['Message'],
+                          postId: post.id,
+                          likes: List<String>.from(post['Likes'] ?? []),
+                          time: formatDate(post['TimeStamp']),
+                          imageUrl: post.data().containsKey('ImageUrl')
+                              ? post['ImageUrl']
+                              : null,
+                          originalAuthor:
+                              post.data().containsKey('OriginalAuthor')
+                                  ? post['OriginalAuthor']
+                                  : null,
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
