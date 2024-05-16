@@ -122,18 +122,40 @@ class _WallPostState extends State<WallPost> {
             ));
   }
 
-  void deletePost() {
-    FirebaseFirestore.instance
-        .collection('User Posts')
-        .doc(widget.postId)
-        .delete();
+  void deletePost() async {
+    final postsCollection = FirebaseFirestore.instance.collection('User Posts');
+    final originalPostId = widget.postId;
+
+    // Get the original post document
+    final originalPostDoc = await postsCollection.doc(originalPostId).get();
+
+    // Get the list of shared post IDs from the original post document
+    final sharedPostIds =
+        List<String>.from(originalPostDoc.data()!['SharedPosts'] ?? []);
+
+    // Create a list of delete operations for shared posts
+    final deleteSharedPostFutures = sharedPostIds.map((sharedPostId) {
+     // print('Deleting shared post: $sharedPostId');
+      return postsCollection.doc(sharedPostId).delete();
+    }).toList();
+
+    // Wait for all delete operations for shared posts to complete
+    await Future.wait(deleteSharedPostFutures);
+
+    // Delete the original post
+   // print('Deleting original post: $originalPostId');
+    await postsCollection.doc(originalPostId).delete();
+
+   // print('Post deletion completed successfully.');
   }
 
   void sharePost() async {
     final currentUserEmail = FirebaseAuth.instance.currentUser!.email;
+    final originalPostId = widget.postId;
     final postsCollection = FirebaseFirestore.instance.collection('User Posts');
     final newPostId = postsCollection.doc().id;
 
+    // Add the new shared post
     await postsCollection.doc(newPostId).set({
       'UserEmail': currentUserEmail,
       'Message': widget.message,
@@ -141,6 +163,13 @@ class _WallPostState extends State<WallPost> {
       'TimeStamp': Timestamp.now(),
       'ImageUrl': widget.imageUrl,
       'OriginalAuthor': widget.user,
+    });
+
+    final originalPostRef = postsCollection.doc(originalPostId);
+
+    // Update the array of shared post IDs in the original post document
+    await originalPostRef.update({
+      'SharedPosts': FieldValue.arrayUnion([newPostId])
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -219,9 +248,12 @@ class _WallPostState extends State<WallPost> {
                       size: 30,
                     ),
                   ),
+                const SizedBox(
+                  height: 20,
+                ),
                 if (widget.imageUrl != null) Image.network(widget.imageUrl!),
                 const SizedBox(
-                  width: 20,
+                  height: 20,
                 ),
 
                 //message and user email
