@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field
-
 import 'package:CONTGUARD/pages/new_post_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,8 +6,6 @@ import 'package:CONTGUARD/components/global_appBar.dart';
 import 'package:CONTGUARD/components/text_field.dart';
 import 'package:CONTGUARD/components/wall_post.dart';
 import 'package:CONTGUARD/helper/helper_method.dart';
-//import 'package:image_picker/image_picker.dart';
-// import 'package:permission_handler/permission_handler.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,12 +15,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //user
-  final currentUser = FirebaseAuth.instance.currentUser!;
+  final currentUser = FirebaseAuth.instance.currentUser!.email;
 
-  //text controller
   final textController = TextEditingController();
-  String? _pickedImagePath;
+
+  // Fetch the list of users the current user is following
+  Future<List<String>> _getFollowingUsers() async {
+    try {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser)
+          .get();
+      final following = List<String>.from(userDoc.data()?['Following'] ?? []);
+      print('Following users: $following');
+      return following;
+    } catch (e) {
+      print('Error fetching following users: $e');
+      return [];
+    }
+  }
 
   // HomePage.dart
   void _openBottomSheet() {
@@ -49,39 +58,64 @@ class _HomePageState extends State<HomePage> {
           children: [
             //the wall
             Expanded(
-              child: StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection("User Posts")
-                    .orderBy("TimeStamp", descending: true)
-                    .snapshots(),
+              child: FutureBuilder<List<String>>(
+                future: _getFollowingUsers(),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        //get the post
-                        final post = snapshot.data!.docs[index];
-                        return WallPost(
-                          user: post['UserEmail'],
-                          message: post['Message'],
-                          postId: post.id,
-                          likes: List<String>.from(post['Likes'] ?? []),
-                          time: formatDate(post['TimeStamp']),
-                          imageUrl: post.data().containsKey('ImageUrl')
-                              ? post['ImageUrl']
-                              : null,
-                          originalAuthor:
-                              post.data().containsKey('OriginalAuthor')
-                                  ? post['OriginalAuthor']
-                                  : null,
-                        );
-                      },
-                    );
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
-                  } else {
-                    return const CircularProgressIndicator();
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Text('No posts to display');
                   }
+
+                  final followingUsers = snapshot.data!;
+                  // Check the number of following users
+                  print('Number of following users: ${followingUsers.length}');
+
+                  return StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("User Posts")
+                        .where('UserEmail',
+                            whereIn: followingUsers.isNotEmpty
+                                ? followingUsers
+                                : ['dummy']) // Ensure no error with empty list
+                        .orderBy("TimeStamp", descending: true)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final docs = snapshot.data!.docs;
+                        // Check the number of posts fetched
+                        print('Number of posts fetched: ${docs.length}');
+
+                        return ListView.builder(
+                          itemCount: docs.length,
+                          itemBuilder: (context, index) {
+                            //get the post
+                            final post = docs[index];
+                            return WallPost(
+                              user: post['UserEmail'],
+                              message: post['Message'],
+                              postId: post.id,
+                              likes: List<String>.from(post['Likes'] ?? []),
+                              time: formatDate(post['TimeStamp']),
+                              imageUrl: post.data().containsKey('ImageUrl')
+                                  ? post['ImageUrl']
+                                  : null,
+                              originalAuthor:
+                                  post.data().containsKey('OriginalAuthor')
+                                      ? post['OriginalAuthor']
+                                      : null,
+                            );
+                          },
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  );
                 },
               ),
             ),

@@ -29,6 +29,8 @@ class _ProfilePageState extends State<ProfilePage> {
   final storage = FirebaseStorage.instance;
   final picker = ImagePicker();
   late String? imageUrl;
+  bool isFollowing = false;
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
@@ -37,50 +39,74 @@ class _ProfilePageState extends State<ProfilePage> {
     fetchProfileImage().then((_) {
       setState(() {}); // Trigger a rebuild after fetching the image
     });
+    checkIfFollowing();
+  }
+
+  Future<void> checkIfFollowing() async {
+    try {
+      final currentUserDoc = await usersCollection.doc(currentUser.email).get();
+      if (currentUserDoc.exists &&
+          currentUserDoc.data()!.containsKey('Following')) {
+        final followingList =
+            List<String>.from(currentUserDoc.data()!['Following']);
+        setState(() {
+          isFollowing = followingList.contains(userEmail);
+        });
+        print('Following list: $followingList');
+        print('Is following: $isFollowing');
+      } else {
+        print('Following list not found or empty.');
+      }
+    } catch (e) {
+      print('Error checking following status: $e');
+    }
   }
 
   Future<void> editField(String field) async {
     String newValue = "";
     await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              backgroundColor: const Color.fromARGB(255, 197, 0, 251),
-              title: Text(
-                "Edit$field",
-                style: const TextStyle(color: Colors.white),
-              ),
-              content: TextField(
-                autofocus: true,
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    hintText: "Enter new $field",
-                    hintStyle: const TextStyle(color: Colors.grey)),
-                onChanged: (value) {
-                  newValue = value;
-                },
-              ),
-              actions: [
-                // cancel button
-                TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.white),
-                    )),
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color.fromARGB(255, 197, 0, 251),
+        title: Text(
+          "Edit $field",
+          style: const TextStyle(color: Colors.white),
+        ),
+        content: TextField(
+          autofocus: true,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: "Enter new $field",
+            hintStyle: const TextStyle(color: Colors.grey),
+          ),
+          onChanged: (value) {
+            newValue = value;
+          },
+        ),
+        actions: [
+          // cancel button
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          // save button
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(newValue),
+            child: const Text(
+              'Save',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
 
-                //save button
-                TextButton(
-                    onPressed: () => Navigator.of(context).pop(newValue),
-                    child: const Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
-                    ))
-              ],
-            ));
-
-    //update in firestore
+    // update in Firestore
     if (newValue.trim().isNotEmpty) {
-      //only upadte if there is something in textfield
+      // only update if there is something in textfield
       await usersCollection.doc(userEmail).update({field: newValue});
     }
   }
@@ -128,34 +154,30 @@ class _ProfilePageState extends State<ProfilePage> {
               FutureBuilder<DocumentSnapshot>(
                 future: usersCollection.doc(userEmail).get(),
                 builder: (context, snapshot) {
-                  //get user data
+                  // get user data
                   if (snapshot.hasData) {
                     final userData =
                         snapshot.data!.data() as Map<String, dynamic>;
                     return Column(
                       children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        //profile pic
+                        const SizedBox(height: 20),
+                        // profile pic
                         GestureDetector(
-                            onTap: uploadProfilePicture,
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundImage: imageUrl != null
-                                  ? NetworkImage(imageUrl!)
-                                  : null,
-                              child: imageUrl == null
-                                  ? const Icon(Icons.person,
-                                      size: 72,
-                                      color: Color.fromARGB(255, 148, 13, 202))
-                                  : null,
-                            )),
-                        const SizedBox(
-                          height: 10,
+                          onTap: uploadProfilePicture,
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundImage: imageUrl != null
+                                ? NetworkImage(imageUrl!)
+                                : null,
+                            child: imageUrl == null
+                                ? const Icon(Icons.person,
+                                    size: 72,
+                                    color: Color.fromARGB(255, 148, 13, 202))
+                                : null,
+                          ),
                         ),
-
-                        //user email
+                        const SizedBox(height: 10),
+                        // user email
                         Text(
                           userEmail,
                           textAlign: TextAlign.center,
@@ -168,75 +190,64 @@ class _ProfilePageState extends State<ProfilePage> {
                             userId: userEmail,
                           ),
                         ),
-                        //username
+                        // username
                         MyTextBox(
                           text: userData['username'],
                           sectionName: 'username',
                           onPressed: () => editField('username'),
                         ),
-
-                        //bio
+                        // bio
                         MyTextBox(
                           text: userData['bio'],
                           sectionName: 'bio',
                           onPressed: () => editField('bio'),
                         ),
-
-                        const SizedBox(
-                          height: 50,
-                        ),
-
-                        //user posts
+                        const SizedBox(height: 50),
+                        // user posts
                       ],
                     );
                   } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error${snapshot.error}'),
-                    );
+                    return Center(child: Text('Error: ${snapshot.error}'));
                   }
-
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const Center(child: CircularProgressIndicator());
                 },
               ),
-              //display user posts
-
-              StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection("User Posts")
-                    .where('UserEmail', isEqualTo: userEmail)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    //get all posts
-                    final posts = snapshot.data!.docs;
-                    return Column(
-                      children: posts.map((post) {
-                        final data = post.data() as Map<String, dynamic>?;
-                        final imageUrl = data?['ImageUrl'];
-                        return WallPost(
-                          user: post['UserEmail'],
-                          message: post['Message'],
-                          postId: post.id,
-                          likes: List<String>.from(post['Likes'] ?? []),
-                          time: formatDate(post['TimeStamp']),
-                          imageUrl: imageUrl,
-                          originalAuthor: data?['OriginalAuthor'],
-                        );
-                      }).toList(), //display user posts
-                      //get user post
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error : ${snapshot.error}'),
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
+              // display user posts
+              isFollowing || userEmail == currentUser.email
+                  ? StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection("User Posts")
+                          .where('UserEmail', isEqualTo: userEmail)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          // get all posts
+                          final posts = snapshot.data!.docs;
+                          return Column(
+                            children: posts.map((post) {
+                              final data = post.data() as Map<String, dynamic>?;
+                              final imageUrl = data?['ImageUrl'];
+                              return WallPost(
+                                user: post['UserEmail'],
+                                message: post['Message'],
+                                postId: post.id,
+                                likes: List<String>.from(post['Likes'] ?? []),
+                                time: formatDate(post['TimeStamp']),
+                                imageUrl: imageUrl,
+                                originalAuthor: data?['OriginalAuthor'],
+                              );
+                            }).toList(), // display user posts
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                              child: Text('Error: ${snapshot.error}'));
+                        }
+                        return const Center(child: CircularProgressIndicator());
+                      },
+                    )
+                  : Center(
+                      child: Text("Follow to see posts!"),
+                    ),
             ],
           ),
         ),
