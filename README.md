@@ -35,11 +35,11 @@
   - Follow users: Follow other users to see their posts on your feed.
   - Save and protect your content: Ensure your posts are saved and copyright rights are maintained.
 
-## GIFs
-
-Here are some GIFs demonstrating the app's functionality:
+## Screeshots
 
 <p align="center">
-  <img src="assets/app.gif" alt="App Functionality" width="300"/>
+  <img src="assets/app.gif" alt="App Functionality" width="250"/>
+  <img src="assets/profile.jpg" alt="profile page" width="250"/>
+  <img src="assets/explore.jpg" alt="explore page" width="250"/>
 </p>
-*App Functionality
+*App Functionality and Additional Images*
