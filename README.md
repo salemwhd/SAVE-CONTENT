@@ -39,5 +39,5 @@
 
 Here are some GIFs demonstrating the app's functionality:
 
-![overview GIF](gifs/app.gif)
-*app Gif*
+![App Functionality](assets/app.gif)
+*App Functionality*
