@@ -39,5 +39,7 @@
 
 Here are some GIFs demonstrating the app's functionality:
 
-![App Functionality](assets/app.gif)
-*App Functionality*
+<p align="center">
+  <img src="assets/app.gif" alt="App Functionality" width="300"/>
+</p>
+*App Functionality
