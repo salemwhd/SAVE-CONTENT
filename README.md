@@ -16,7 +16,7 @@
 ## Technologies Used
 
 - **Flutter**: Used for developing the mobile application for both Android and iOS.
-- **Firebase**: Utilized for backend services including authentication, real-time database, and cloud storage.
+- **Firebase**: Utilized for backend services including authentication, firestore database, and cloud storage.
 - **Dart**: The programming language used in Flutter development.
 
 ## Installation
