@@ -1,45 +1,43 @@
-## Social Wall -Flutter
+# Save Content
 
-This is the Social Wall-the Social Media App  made with flutter and Dart.
+## Overview
 
-The Users can register and login.
-The Users can Post on the wall which will be visible to other logged in users.
-The other users can like and comment on the wall posts.
+**Save Content** is a social media application designed to allow users to post, share, like, and comment on content. It provides a platform for users to follow each other and ensures that users can save and protect their content, including text and images, by maintaining copyright rights.
 
+## Features
 
+- **User Registration and Authentication**: Users can create accounts, log in, and manage their profiles.
+- **Posting**: Users can create posts with text and images.
+- **Sharing**: Posts can be shared by users on their profiles.
+- **Liking and Commenting**: Users can like and comment on posts.
+- **Following**: Users can follow each other to see updates from people they are interested in.
+- **Content Saving and Copyright**: Users can save their content and retain copyright rights, ensuring their work is protected.
 
+## Technologies Used
 
-## Demo
+- **Flutter**: Used for developing the mobile application for both Android and iOS.
+- **Firebase**: Utilized for backend services including authentication, real-time database, and cloud storage.
+- **Dart**: The programming language used in Flutter development.
 
-Demo Images
+## Installation
 
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/save-content.git
+   cd save-content
 
-![social1-removebg-preview](https://github.com/Vedant-20/CONTGUARD/assets/91717779/863fded8-a038-4939-9231-3937c7bf0838)
-![social2-removebg-preview](https://github.com/Vedant-20/CONTGUARD/assets/91717779/af234925-c7cf-45ff-a151-741149cd8c10)
-![social3-removebg-preview](https://github.com/Vedant-20/CONTGUARD/assets/91717779/bd6675e3-465a-4e4f-8226-012acc23842d)
-![social4-removebg-preview](https://github.com/Vedant-20/CONTGUARD/assets/91717779/8831afd6-4020-41d9-9efc-adb96578d876)
+## Usage
 
+  - Create an account: Sign up using your email and password.
+  - Log in: Access your account with your credentials.
+  - Create a post: Share your thoughts or images by creating a post.
+  - Interact with posts: Like, comment, and share posts from other users.
+  - Follow users: Follow other users to see their posts on your feed.
+  - Save and protect your content: Ensure your posts are saved and copyright rights are maintained.
 
+## GIFs
 
+Here are some GIFs demonstrating the app's functionality:
 
-## Contributing
-
-Contributions are always welcome!
-
-
-If you want to contribute to this Project.
-Just Fork this repository and make a pull request after changes.
-
-
-Setup the firebase.
-
-Add the google-services.json file in your android/app/ directory
-
-
-## Additions for Contribution
-
-1)Add the option to delete the posts.
-
-2)Add the option to post the image on wall with captions.
-
-3)Fetch the wall posts to profile section under My Posts.
+![overview GIF](gifs/app.gif)
+*app Gif*
