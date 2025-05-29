@@ -42,4 +42,4 @@
   <img src="assets/profile.jpg" alt="profile page" width="250"/>
   <img src="assets/explore.jpg" alt="explore page" width="250"/>
 </p>
-*App Functionality and Additional Images*
+
